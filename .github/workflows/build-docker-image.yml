@@ -1,0 +1,15 @@
+name: Build Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: [self-hosted, linux, ARM64]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: ARCH=arm64 bash ./scripts/run_action.sh shadowbox/docker/build
