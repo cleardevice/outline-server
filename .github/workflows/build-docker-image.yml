@@ -5,11 +5,26 @@ on:
 
 jobs:
 
-  build:
+  linux-x86_64:
+    runs-on: [linux, AMD64]
 
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: bash ./scripts/run_action.sh shadowbox/docker/build
+
+  linux-arm64:
     runs-on: [self-hosted, linux, ARM64]
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: ARCH=arm64 bash ./scripts/run_action.sh shadowbox/docker/build
+
+  macos-x86_64:
+    runs-on: [macos-13]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: bash ./scripts/run_action.sh shadowbox/docker/build
